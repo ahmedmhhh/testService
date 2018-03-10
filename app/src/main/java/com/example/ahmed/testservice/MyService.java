@@ -2,6 +2,7 @@ package com.example.ahmed.testservice;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -18,7 +19,19 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.e("MyService","onStartCommand now");
-        return super.onStartCommand(intent, flags, startId);
+        new CountDownTimer(3000,1000){
+
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                stopSelf();
+            }
+        }.start();
+        return Service.START_STICKY;
     }
 
     @Override
